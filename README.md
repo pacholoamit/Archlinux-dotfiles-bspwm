@@ -7,7 +7,7 @@ Glorious archlinux dotfiles repository for a glorious BSPWM desktop environment 
 
 ![image](https://user-images.githubusercontent.com/69985528/124699391-4a634f00-df1d-11eb-9d26-de7ccadc0e78.png)
 
-## Details & config for:
+## Details:
 
 - `Terminal`: alacritty
 - `Window manager`: bspwm (Tiling window manager)
