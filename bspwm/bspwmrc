@@ -1,0 +1,52 @@
+#! /bin/sh
+PANEL_FIFO=/tmp/panel-fifo
+xsetroot -cursor_name left_ptr
+
+# Set dual monitors
+xrandr --output HDMI-A-0 --primary --rotate normal --output DisplayPort-0 --rotate normal --right-of HDMI-A-0 &
+
+#Turn on picom
+picom --experimental-backends &
+#picom --experimental-backends &
+
+#Launch polybar
+~/.config/polybar/./launch.sh
+
+# Basic Configuration
+bspc config split_ratio      		0.52
+bspc config borderless_monocle 		true
+bspc config borderless_monocle   	true
+bspc config single_monocle      	false
+bspc config gapless_monocle      	true
+bspc config focus_by_distance   	true
+bspc config focus_follows_pointer   true
+bspc config border_width       		0
+bspc config window_gap           	15
+bspc config focused_border_color    "#5beedc"
+bspc config active_border_color     "#5beedc"
+bspc config presel_feedback_color   "#2D2D2D"
+bspc config normal_border_color     "#2D2D2D"
+
+bspc rule -a Yad state=floating
+# bspc rule -a firefox desktop='^2'
+# bspc rule -a TelegramDesktop desktop='^3'
+# bspc rule -a Thunar desktop='^4'
+# bspc rule -a Geany desktop='^5'
+# bspc rule -a Subl desktop='^5'
+# bspc rule -a Gimp desktop='^6'
+
+bspc monitor HDMI-A-0 -d "1  " "2  " "3  " "4  " "5  " "6  " "7  " 
+bspc monitor DisplayPort-0 -d "8  "  "9  " "10  "
+
+
+# Top panel
+bspc config top_padding 30
+#pkill xmobar ; xmobar $HOME/.config/bspwm/panel/xmobarrc.hs &
+#pkill trayer ; trayer --edge top --align left --widthtype request --height 21 --alpha 0 --transparent true --monitor primary --width 3 --iconspacing 5 --tint 0x191919 &
+pkill sxhkd ; sxhkd &
+pkill conky ; (sleep 6 ; conky -c $HOME/.config/bspwm/conky.conkyrc) &
+
+######## DO NOT REMOVE THIS BLOCK ########
+systemctl --user restart utilities
+######## DO NOT REMOVE THIS BLOCK ########
+r

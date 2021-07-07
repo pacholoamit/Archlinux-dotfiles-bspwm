@@ -1,0 +1,64 @@
+#!/bin/sh
+padding=" "
+COLOR_PRIMARY="#5beedc"
+COLOR_ALT="#6C6C6C"
+while read -r line ; do
+	case $line in
+              
+		W*)
+													# bspwm's state
+													wm=""
+													IFS=':'
+													set -- ${line#?}
+													while [ $# -gt 0 ] ; do
+														item=$1
+														name=${item#?}
+														case $item in
+															[FoOuU]*)
+																case $item in
+																	# f*)
+																	# 	# free desktop
+																	# 	FG="<fc=${COLOR_ALT}>"
+																	# 	BG="</fc>"
+																	# 	#name=""
+																	# 	;;
+																	F*)
+																		# focused free desktop
+																		FG="<fc=${COLOR_PRIMARY}>"
+																		BG="</fc>"
+																		;;
+																	o*)
+																		# occupied desktop
+																		FG="<fc=${COLOR_ALT}>"
+																		BG="</fc>"
+																		;;
+																	O*)
+																		# focused occupied desktop
+																		FG="<fc=${COLOR_PRIMARY}>"
+																		BG="</fc>"
+																		;;
+																	u*)
+																		# urgent desktop
+																		FG="<fc=#fb4934>"
+																		BG="</fc>"
+																		;;
+																	U*)
+																		# focused urgent desktop
+																		FG="<fc=${COLOR_PRIMARY}>"
+																		BG="</fc>"
+																		;;
+																esac
+																name=$(echo $name | sed -e 's/\([0-9]\+\)/\<fn=0>\1\<\/fn>/g')
+																wm="${wm}${FG}${padding}${name}${padding}${BG}"
+																;;
+															[T]*)
+																# layout, state and flags
+																wm="<fn=0>[<fc=${COLOR_PRIMARY}>${name}</fc>]</fn>  ${wm}"
+																;;
+														esac
+														shift
+													done
+													;;
+										esac
+	printf "%s\n" "<fc=${COLOR_ALT}>${wm}</fc>"
+done

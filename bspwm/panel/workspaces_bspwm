@@ -1,0 +1,12 @@
+#!/bin/sh
+WORKSPACES_FIFO=/tmp/workspaces-fifo
+
+
+[ -e "$WORKSPACES_FIFO" ] && rm "$WORKSPACES_FIFO"
+mkfifo "$WORKSPACES_FIFO"
+
+bspc subscribe report > "$WORKSPACES_FIFO" &
+
+$HOME/.config/bspwm/panel/workspaces < "$WORKSPACES_FIFO" &
+
+wait
