@@ -9,22 +9,19 @@
 
 
 
-#neofetch
+# neofetch
 neofetch --ascii_distro archlinux_small
 
-# Global
+# ZSH Global exntensions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source ~/.zsh/zsh-completions/zsh-completions.plugin.zsh
 source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
-# Spicetify
-export SPICETIFY_INSTALL="/home/hashlinux/spicetify-cli"
-export PATH="$SPICETIFY_INSTALL:$PATH"
+# Get image for w3m text browser
 
-export TERM=termite
-[[ ! -f /usr/share/fzf/completion-ia.zsh ]] || source /usr/share/fzf/completion-ia.zsh
-[[ ! -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]] || source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+w3mimg () {
+        w3m -o imgdisplay=/usr/lib/w3m/w3mimgdisplay $1
+}
 
 case $TERM in
   xterm*)
