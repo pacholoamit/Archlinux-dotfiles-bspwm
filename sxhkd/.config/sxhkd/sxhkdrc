@@ -7,7 +7,7 @@ Print
 
 # terminal emulator
 super + Return
-	alacritty
+	kitty
 
 super + x
 	power-menu
