@@ -17,17 +17,12 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
-# Get image for w3m text browser
+# Kitty config
+autoload -Uz compinit
+compinit
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
 
-w3mimg () {
-        w3m -o imgdisplay=/usr/lib/w3m/w3mimgdisplay $1
-}
-
-case $TERM in
-  xterm*)
-    precmd () {print -Pn "\e]0;%~\a"}
-    ;;
-esac
 
 # History Configuration
 HISTSIZE=5000               #How many lines of history to keep in memory
@@ -52,3 +47,7 @@ fi
 # Personal config file 
 [[ ! -f ~/.zshrc-personal ]] || source ~/.zshrc-personal
 
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/hashlinux/.sdkman"
+[[ -s "/home/hashlinux/.sdkman/bin/sdkman-init.sh" ]] && source "/home/hashlinux/.sdkman/bin/sdkman-init.sh"
